@@ -1,5 +1,4 @@
-import React, {Component} from 'react';
-import M from 'materialize-css'
+import React from 'react';
 
 
 const Nav = () => {
