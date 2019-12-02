@@ -1,16 +1,30 @@
 import React, { Component } from 'react';
-import Nav from './Nav';
-import SearchBox from './SearchBox'
+// import Nav from './Nav';
+// import SearchBox from './SearchBox'
 import MovieList from './MovieList'
-import Pagination from './Pagination'
-import MovieInfo from './MovieInfo'
+// import Pagination from './Pagination'
+// import MovieInfo from './MovieInfo'
+import Movie from './Movie'
+
 
 class App extends Component {
-	constructor () {
+	
+	
+	
+	render() {
+		return (
+			<div className='App'>
+				<MovieList />
+			</div>
+		)
+	}
+	
+	
+	/* constructor () {
 		super()
 		this.state = {
 			movies: [],
-			searchTerm: '',
+			,
 			totalResults: 0,
 			currentPage: 1,
 			currentMovie: null
@@ -65,13 +79,14 @@ class App extends Component {
 						<SearchBox handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
 						<MovieList viewMovieInfo={this.viewMovieInfo}  movies={this.state.movies}/>
 					</div>
-					: <MovieInfo currentMovie={this.state.currentMovie} closeMovieInfo={this.closeMovieInfo} />
+					: <div><SearchBox handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
+						<MovieInfo currentMovie={this.state.currentMovie} closeMovieInfo={this.closeMovieInfo} /></div>
 				}
 				
-				{ (this.state.totalResults > 20 && this.state.currentMovie == null) && <Pagination pages={numberPages} nextPage={this.nextPage} currentPage={this.state.currentPage}/> }
+				{  <Pagination pages={numberPages} nextPage={this.nextPage} currentPage={this.state.currentPage}/> }
       </div>
     );
-  }
-}
+  } */
+} 
 
 export default App;
