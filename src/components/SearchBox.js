@@ -4,7 +4,7 @@ class SearchBox extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			searchTerm: ''
+			query: ''
 		}
 		
 		this.handleChange = this.handleChange.bind(this)
@@ -19,7 +19,7 @@ class SearchBox extends Component {
 	
 	handleSubmit(evt) {
 		evt.preventDefault();
-		this.props.searchMovies(this.state.searchTerm)
+		this.props.searchMovies(this.state.query)
 	}
 	
 	render() {
@@ -27,13 +27,13 @@ class SearchBox extends Component {
 			<div>
 				<form onSubmit={this.handleSubmit}>
 					<div>
-						<label htmlFor='searchTerm' >Enter your film</label>
+						<label htmlFor='query' >Enter your film</label>
 						<input 
 							type='text' 
-							name='searchTerm' 
-							value={this.state.searchTerm} 
+							name='query' 
+							value={this.state.query} 
 							onChange={this.handleChange}
-							id='searchTerm'
+							id='query'
 						/>
 					</div>
 					<button>SEARCH!</button>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-// import Nav from './Nav';
+import {Route, Switch} from 'react-router-dom';
+import Nav from './Nav';
 // import SearchBox from './SearchBox'
 import MovieList from './MovieList'
 // import Pagination from './Pagination'
@@ -14,7 +15,17 @@ class App extends Component {
 	render() {
 		return (
 			<div className='App'>
-				<MovieList />
+				<Switch>
+					<Route 
+						exact path='/movielist/:name' 
+						render={ routeProps => <MovieList {...routeProps} />}
+					/>
+					<Route
+						exact
+						path = '/'
+						render ={() => <Nav />}
+					/>
+				</Switch>				
 			</div>
 		)
 	}

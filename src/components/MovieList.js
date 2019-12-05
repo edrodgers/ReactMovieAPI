@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import axios from 'axios'
 import Movie from './Movie'
-import SearchBox from './SearchBox'
+import Nav from './Nav'
 import '../styles/MovieList.css'
 
 
@@ -10,37 +11,43 @@ class MovieList extends Component {
 		super(props)
 		this.state = { 
 			movies: [],
-			searchTerm: '',
+			query: '',
 			totalResults: 0,
 			currentPage: 1
 		
 		}
 		
-		this.searchMovies = this.searchMovies.bind(this)
 		this.nextPage = this.nextPage.bind(this)
 		
 	}
 	
-	searchMovies(term){
-		
-		fetch(`https://api.themoviedb.org/3/search/movie?api_key=e3eaa7d9a9306546e691ebb236b3feb0&query=${term}`)
-		.then(data => data.json())
-		.then(data => {
-			console.log(data);
-			this.setState({
-				movies: [...data.results], 
-				totalResults: data.total_results,
-				searchTerm: term,
-				currentPage: 1
-			})
-		})
+	 async componentDidMount(){
+		await this.searchMovies(this.props.match.params.name)
 	}
 	
+	async componentDidUpdate(prevProps, prevState){
+		 if (this.props.match.params.name !== prevProps.match.params.name) {
+			await this.searchMovies(this.props.match.params.name)
+		}
+		
+	}
+	
+	async searchMovies(searchQuery) {
+		let searchResults = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=e3eaa7d9a9306546e691ebb236b3feb0&query=${searchQuery}`)	
+		this.setState({
+				movies: [...searchResults.data.results], 
+				totalResults: searchResults.data.total_results,
+				query: this.props.match.params.name,
+				currentPage: 1
+			})
+	
+	}
+
+	
 	nextPage = (pageNumber) => {
-		fetch(`https://api.themoviedb.org/3/search/movie?api_key=e3eaa7d9a9306546e691ebb236b3feb0&query=${this.state.searchTerm}&page=${pageNumber}`)
+		fetch(`https://api.themoviedb.org/3/search/movie?api_key=e3eaa7d9a9306546e691ebb236b3feb0&query=${this.state.query}&page=${pageNumber}`)
 		.then(data => data.json())
 		.then(data => {
-			console.log(data);
 			this.setState({movies: [...data.results], currentPage: pageNumber})
 		})
 	}
@@ -73,7 +80,7 @@ class MovieList extends Component {
 		
 		return (
 			<div className='MovieList'>
-				<SearchBox searchMovies={this.searchMovies} />
+				<Nav />
 				<div>
 					{movies}
 				</div>
@@ -104,33 +111,9 @@ class MovieList extends Component {
 						</div>
 					</div>
 				}
-				
-				
 			</div>
 		)
 	}
 }
-
-// const MovieList = (props) => {
-// 	return (
-// 		<div className="container">
-// 		<div className='row'>
-// 			<div className='col s12'>
-// 				{props.movies.map((movie, i) => {
-// 					return (
-// 						<Movie 
-// 							key={i} 
-// 							viewMovieInfo={props.viewMovieInfo} 
-// 							movieId={movie.id} 
-// 							image={movie.poster_path}
-// 						/>
-// 					)
-// 				})}
-// 			</div>
-// 		</div>
-// 	</div>
-// 	)
-	
-// }
 
 export default MovieList;
