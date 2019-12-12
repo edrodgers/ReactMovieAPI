@@ -6,6 +6,7 @@ import MovieList from './MovieList'
 // import Pagination from './Pagination'
 // import MovieInfo from './MovieInfo'
 import Movie from './Movie'
+import '../styles/App.css'
 
 
 class App extends Component {
