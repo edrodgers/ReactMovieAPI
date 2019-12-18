@@ -1,25 +1,29 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/styles';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 
 const styles = {
 	navContainer: {
 		backgroundColor: '#4c4c4c',
 		overflow: 'hidden',
+		height: '100px',
+		width: '100%',
+		zIndex: '1',
+	},
+	
+	navContainerInner:{
 		position: 'relative',
-		height: '100px'
+	},
+	
+	homeButtonContainer: {
+		padding: '20px',
+		
 	},
 	
 	homeButton: {
 		color: '#E8E8E8',
+		fontSize: '40px',
+		textDecoration: 'none'
 	},
 	
 	searchForm: {
@@ -29,7 +33,7 @@ const styles = {
 		marginLeft: '170px',
 		top: '50%',
 		left: '50%',
-		transform: 'translate(-50%, -50%)',
+		transform: 'translate(-50%, -20%)',
 	},
 	
 	searchFormInput: {
@@ -192,58 +196,38 @@ class Nav extends Component {
 
 	}
 	
-// 	${this.state.searchbox && classes.close}
-// ${this.state.searchbox && classes.square}	
-	
 	render(){
 		const { classes } = this.props;
+		const { searchbox } = this.state;
 		
 		return (
 			
 			<nav className={classes.navContainer}>
-				<a className={classes.homeButton}>
-					Film Quest
-				</a>
-				<form className={classes.searchForm}>
-					<input
-					className={ `${classes.searchFormInput} ${this.state.searchbox && classes.square}`}
-						placeholder="Search…"
-						type='text' 
-						name='query' 
-						value={this.state.query} 
-						onChange={this.handleChange}
-						id='query'
-					/>
-					<button type='reset' className={ `${classes.searchFormButton} ${this.state.searchbox && classes.close}` } onClick={this.toggleBox}></button>
-					<Link to={`/movielist/${this.state.query}`} >
-						<button type='submit' className={classes.submitButton}>
-						</button>
-					</Link>
-				</form>
+				<div className={classes.navContainerInner}>
+					<div className={classes.homeButtonContainer}>
+						<Link to='/' className={classes.homeButton}>
+							Film Quest
+						</Link>
+					</div>
+
+					<form className={classes.searchForm}>
+						<input
+						className={ `${classes.searchFormInput} ${(searchbox ? classes.square : '')}`}
+							placeholder= "Search…"
+							type='text' 
+							name='query' 
+							value={this.state.query} 
+							onChange={this.handleChange}
+							id='query'
+						/>
+						<button type='reset' className={ `${classes.searchFormButton} ${(searchbox ? classes.close : '')}` } onClick={this.toggleBox}></button>
+						<Link to={`/movielist/${this.state.query}/page/1`} >
+							<button type='submit' className={classes.submitButton}>
+							</button>
+						</Link>
+					</form>
+				</div>
 			</nav>
-			
-			// <nav>
-			// 	<div className='nav-wrapper container'>
-			// 		<a href='#' className='brand-logo'>Film Quest</a>
-			// 	</div>
-			// 	<div>
-			// 	<form onSubmit={this.handleSubmit}>
-			// 		<div>
-			// 			<label htmlFor='query' >Enter your film</label>
-			// 			<input 
-			// 				type='text' 
-			// 				name='query' 
-			// 				value={this.state.query} 
-			// 				onChange={this.handleChange}
-			// 				id='query'
-			// 			/>
-			// 		</div>
-			// 		<button>SEARCH!</button>
-			// 	</form>
-			// </div>
-			// </nav>
-			
-			
 		)
 	}
 }

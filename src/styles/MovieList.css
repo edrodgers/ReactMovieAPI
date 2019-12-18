@@ -1,3 +1,52 @@
 .MovieList {
-	height: 100vh;
+	width: 1200px;
+}
+
+.Movie-container {
+    margin: 10px;
+}
+
+.MovieList, .MovieList-pagination {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	padding-top: 60px;
+	margin: 0 auto;
+}
+
+img.Movie-img {
+  width: 250px;
+	margin-bottom: 1em;
+	border-radius: 20px;
+	opacity: .75;
+	transition: opacity .2s;
+}
+
+.Movie-container:hover img.Movie-img {
+    opacity: 1;
+    transition: opacity .2s;
+}
+
+.MovieList-pagination {
+	width: 900px;
+}
+
+ul.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+li.pagination-item {
+    padding: 10px;
+	 background: #db6a36;
+    margin: 10px;
+    width: 33px;
+    text-align: center;
+}
+
+.pagination-item a {
+    color: white;
+    text-decoration: none;
 }

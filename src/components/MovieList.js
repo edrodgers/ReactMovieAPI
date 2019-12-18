@@ -61,37 +61,47 @@ class MovieList extends Component {
 				title={movie.title}
 			/>
 		))
-		
+
 		const numberPages = Math.floor(this.state.totalResults / 20);
 		const pageLinks = [];
 		
-		for(let i = 1; i <= numberPages +1; i++) {
+		for(let i = this.state.currentPage; i <= this.state.currentPage + 4; i++ ) {
 			let active = this.state.currentPage == i ? 'active' : '';
-
+			
+			// if (this.state.currentPage > pageLinks[4])
 			pageLinks.push(
 				<li 
-					className={`waves-effeect ${active}`} 
+					className={`pagination-item ${active}`} 
 					key={i}
-					onClick={() => this.nextPage(i)} 
+					onClick={() => this.nextPage(i)} k
 				>
 					<a href='#' >{i}</a>
 				</li> )
 		}
 		
 		return (
-			<div className='MovieList'>
-				<Nav />
-				<div>
+			<div className='MovieList-container'>
+				
+				<div className='MovieList'>
 					{movies}
 				</div>
 				{
 					(this.state.totalResults > 20) &&
-					<div className='container'>
+					<div className='MovieList-pagination'>
 						<div className='row'>
 							<ul className='pagination'>
-								{this.state.currentPage > 1 && 
+								{this.state.currentPage > 1 &&
+									<li
+										className={`pagination-item`} 
+										onClick={() => this.nextPage(1)}
+									>
+										<a href='#' >First</a>
+									</li>
+								}
+								{ this.state.currentPage > 1 && 
+									
 									<li 
-										className={`waves-effeect`} 
+										className={`pagination-item`} 
 										onClick={() => this.nextPage(this.state.currentPage - 1)} 
 									>
 										<a href='#' >Prev</a>
@@ -101,10 +111,20 @@ class MovieList extends Component {
 								{
 									this.state.currentPage < numberPages + 1 && 
 										<li 
-											className={`waves-effeect`} 
+											className={`pagination-item`} 
 											onClick={() => this.nextPage(this.state.currentPage + 1)} 
 										>
 											<a href='#' >Next</a>
+										</li>
+										
+								}
+								{
+									this.state.currentPage < numberPages + 1 &&
+										<li 
+											className={`pagination-item`} 
+											onClick={() => this.nextPage(numberPages)} 
+										>
+											<a href='#' >Last</a>
 										</li>
 								}
 							</ul>

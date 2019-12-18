@@ -18,8 +18,8 @@ class App extends Component {
 			<div className='App'>
 				<Switch>
 					<Route 
-						exact path='/movielist/:name' 
-						render={ routeProps => <MovieList {...routeProps} />}
+						exact path='/movielist/:name/page/:number' 
+						render={ routeProps => <div> <Nav /> <MovieList {...routeProps} /> </div>}
 					/>
 					<Route
 						exact

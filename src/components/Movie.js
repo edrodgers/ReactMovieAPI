@@ -6,16 +6,18 @@ class Movie extends Component {
 		const {imagePath, movieId, title} = this.props
 		
 		return(
-			<div className='Movie'>
-					<div>
-						<img src={`https://image.tmdb.org/t/p/w500/${imagePath}`} alt='card' />
-						<div>
+			<div className='Movie-container'>
+					<div className='Movie'>
+						<img src={`https://image.tmdb.org/t/p/w500/${imagePath}`} alt='card' className='Movie-img' />
+						<div className='Movie-title'>
 							<span>{title}</span>
 						</div>
+						<div className='Movie-Details'>
+							{/* <p><a href='#' onClick={() => props.viewMovieInfo(props.movieId)} >View Details</a></p> */}
+							<p>View Details</p>
+						</div>
 					</div>
-					<div className='card-content'>
-						{/* <p><a href='#' onClick={() => props.viewMovieInfo(props.movieId)} >View Details</a></p> */}
-					</div>
+					
 			</div>
 		)
 	}
