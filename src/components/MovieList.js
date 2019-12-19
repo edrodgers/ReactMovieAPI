@@ -5,6 +5,8 @@ import Nav from './Nav'
 import '../styles/MovieList.css'
 
 
+
+
 class MovieList extends Component {
 	
 	constructor (props) {
@@ -64,11 +66,13 @@ class MovieList extends Component {
 
 		const numberPages = Math.floor(this.state.totalResults / 20);
 		const pageLinks = [];
+		let lastPage = this.state.currentPage > 5 ? Math.ceil(this.state.currentPage/5) * 5 : 5;
+		let firstPage = lastPage - 4;
 		
-		for(let i = this.state.currentPage; i <= this.state.currentPage + 4; i++ ) {
+		
+		for(let i = firstPage; i <= lastPage; i++ ) {
 			let active = this.state.currentPage == i ? 'active' : '';
 			
-			// if (this.state.currentPage > pageLinks[4])
 			pageLinks.push(
 				<li 
 					className={`pagination-item ${active}`} 

@@ -40,7 +40,7 @@ ul.pagination {
 
 li.pagination-item {
     padding: 10px;
-	 background: #db6a36;
+	 background: #e27e50;
     margin: 10px;
     width: 33px;
     text-align: center;
@@ -49,4 +49,9 @@ li.pagination-item {
 .pagination-item a {
     color: white;
     text-decoration: none;
+}
+
+li.pagination-item.active {
+	transform: scale( 1.2);
+	background: #c5470d;
 }
