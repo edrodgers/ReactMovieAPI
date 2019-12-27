@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import Movie from './Movie'
-import Nav from './Nav'
 import '../styles/MovieList.css'
 
 
@@ -24,6 +23,7 @@ class MovieList extends Component {
 	}
 	
 	 async componentDidMount(){
+		console.log(this.props.match.params)
 		await this.searchMovies(this.props.match.params.name)
 	}
 	
@@ -77,7 +77,7 @@ class MovieList extends Component {
 				<li 
 					className={`pagination-item ${active}`} 
 					key={i}
-					onClick={() => this.nextPage(i)} k
+					onClick={() => this.nextPage(i)}
 				>
 					<a href='#' >{i}</a>
 				</li> )

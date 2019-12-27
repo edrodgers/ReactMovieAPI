@@ -13,6 +13,11 @@ const styles = {
 	
 	navContainerInner:{
 		position: 'relative',
+		display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    margin: '0 auto',
 	},
 	
 	homeButtonContainer: {
@@ -27,13 +32,11 @@ const styles = {
 	},
 	
 	searchForm: {
-		position: 'absolute',
+		position: 'relative',
 		height: '50px',
 		width: '300px',
-		marginLeft: '170px',
-		top: '50%',
-		left: '50%',
-		transform: 'translate(-50%, -20%)',
+		margin: '20px',
+		
 	},
 	
 	searchFormInput: {
@@ -46,15 +49,14 @@ const styles = {
 		color: '#fff',
 		fontSize: '16px',
 		fontWeight: '400',
-		fontFamily: 'Roboto',
 		outline: '0',
 		webkitTransition: 'width 0.4s ease-in-out, border-radius 0.8s ease-in-out, padding 0.2s',
 		transition: 'width 0.4s ease-in-out, border-radius 0.8s ease-in-out, padding 0.2s',
 		webkitTransitionDelay: '0.4s',
 		transitionDelay:' 0.4s',
-		webkitTransform: 'translate(-100%, -50%)',
-		msTransform: 'translate(-100%, -50%)',
-		transform: 'translate(-100%, -50%)',
+		float: 'right',
+		position: 'absolute',
+		right: '0',
 		
 	},
 	
@@ -62,7 +64,7 @@ const styles = {
 		background: 'none',
 		position: 'absolute',
 		top: '0px',
-		left: '0',
+		right: '0',
 		height: '50px',
 		width: '50px',
 		padding: '0',
@@ -73,9 +75,8 @@ const styles = {
 		cursor: 'pointer',
 		webkitTransition: '0.2s ease-in-out',
 		transition: '0.2s ease-in-out',
-		webkitTransform: 'translate(-100%, -50%)',
-		msTransform: 'translate(-100%, -50%)',
-		transform: 'translate(-100%, -50%)',
+		float: 'right',
+		position: 'absolute',
 		
 		"&::before": {
 			content: '""',
@@ -121,7 +122,7 @@ const styles = {
 				width: '27px',
 				height: '4px',
 				backgroundColor: '#fff',
-				margiTtop: '-1px',
+				marginTop: '-1px',
 				marginLeft: '-13px',
 				cursor: 'pointer',
 				webkitTransform: 'rotate(-45deg)',
@@ -132,25 +133,15 @@ const styles = {
 
 
 	square: {
-		boxSizing: 'border-box',
-		padding: '0 40px 0 10px',
 		width: '300px',
-		height: '50px',
-		border: '4px solid #ffffff',
 		borderRadius: '0',
-		background: 'none',
-		color: '#fff',
-		fontFamily: 'Roboto',
-		fontSize: '16px',
-		fontWeight: '400',
-		outline: '0',
+		padding: '0 40px 0 10px',
 		webkitTransition: 'width 0.4s ease-in-out, border-radius 0.4s ease-in-out, padding 0.2s',
 		transition: 'width 0.4s ease-in-out, border-radius 0.4s ease-in-out, padding 0.2s',
 		webkitTransitionDelay: '0.4s, 0s, 0.4s',
 		transitionDelay: '0.4s, 0s, 0.4s',
-		webkitTransform: 'translate(-100%, -50%)',
-		msTransform: 'translate(-100%, -50%)',
-		transform: 'translate(-100%, -50%)',
+		
+		
 	},
 	
 	submitButton: {
@@ -172,7 +163,6 @@ class Nav extends Component {
 		}
 		
 		this.handleChange = this.handleChange.bind(this)
-		this.handleSubmit = this.handleSubmit.bind(this)
 		this.toggleBox = this.toggleBox.bind(this)
 		
 	}
@@ -181,11 +171,6 @@ class Nav extends Component {
 		this.setState({
 			[evt.target.name]: evt.target.value
 		})
-	}
-	
-	handleSubmit(evt) {
-		evt.preventDefault();
-		this.props.searchMovies(this.state.query)
 	}
 	
 	toggleBox(evt) {

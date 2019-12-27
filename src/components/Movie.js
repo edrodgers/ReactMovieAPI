@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom'
 import '../styles/Movie.css'
 
 class Movie extends Component {
@@ -13,8 +14,10 @@ class Movie extends Component {
 							<span>{title}</span>
 						</div>
 						<div className='Movie-Details'>
-							{/* <p><a href='#' onClick={() => props.viewMovieInfo(props.movieId)} >View Details</a></p> */}
-							<p>View Details</p>
+							<Link to={`/movie/${movieId}`} onClick={e => e.stopPropagation()}>
+								<button type='submit'>View Details</button>
+							</Link>
+							
 						</div>
 					</div>
 					

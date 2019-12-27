@@ -1,11 +1,58 @@
-import React from 'react'
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom'
+import { withStyles } from '@material-ui/styles';
+import axios from 'axios'
 
-const MovieInfo = (props) => {
-	return (
+const styles = {
+	
+	// tester: ({ state }) => ({
+	// 	backgroundImage: `'url(https://image.tmdb.org/t/p/original${state.backdrop})'`,
+	// })
+
+}
+
+class MovieInfo extends Component  {
+	
+	constructor (props) {
+		super(props)
+		this.state = { 
+			backdrop: '',
+			poster: '',
+			id: null,
+			title: '',
+			overview: '',
+			genres: [],
+			releaseDate: null
+		
+		}
+	}
+	
+	  componentDidMount(){
+			this.getMovieInfo(this.props.match.params.id)
+	}
+
+	
+	async getMovieInfo(movieId) {
+		let searchResults = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=e3eaa7d9a9306546e691ebb236b3feb0&language=en-US`)	
+		this.setState({
+			backdrop: searchResults.data.backdrop_path,
+			poster: searchResults.data.poster_path,
+			id: searchResults.data.id,
+			title: searchResults.data.title,
+			overview: searchResults.data.overview,
+			genres: [...searchResults.data.genres], 
+			releaseDate: searchResults.data.release_date
+			})
+	
+	}
+	render() {
+		const {classes} = this.props;
+		const { backdrop, poster, id, title, overview, genres, releaseDate} = this.state;
+		
+		return (
 		<div className='container'>
 			<div 
 				className='row' 
-				onClick={props.closeMovieInfo} 
 				style={{cursor: 'pointer', paddingTop: '50px'}} 
 			>
 				<i className='fas fa-arrow-left'></i>
@@ -13,22 +60,25 @@ const MovieInfo = (props) => {
 			</div>
 			<div className='row'>
 				<div className='col s12 m4'>
-					{props.currentMovie.poster_path == null ?
-						 <img src={`http://s3-ap-southeast-1.amazonaws.com/upcode/static/default-image.jpg`} alt='missing movie' style={{width: '100%', height: '360px'}}/>
-						:<img src={`https://image.tmdb.org/t/p/w185${props.currentMovie.poster_path}`} alt='card' style={{width: '100%', height: '360px'}}/>
+					{poster == null ?
+						 <img src={`http://s3-ap-southeast-1.amazonaws.com/upcode/static/default-image.jpg`} alt='missing movie' />
+						:<div><img src={`https://image.tmdb.org/t/p/original${poster}`} alt='card' /> <img src={`https://image.tmdb.org/t/p/original${backdrop}`} alt='card' /> </div>
 					}
 				</div>
 				<div className='col s12 m8'>
 					<div className='info-container'>
-						<p>{props.currentMovie.title}</p>
-						<p>{props.currentMovie.release_date.substring(5).split('-').concat(props.currentMovie.release_date.substring(0, 4)).join('/') }</p>
-						<p>{props.currentMovie.overview}</p>
+						<p>{title}</p>
+						{/*<p>{release_date.substring(5).split('-').concat(release_date.substring(0, 4)).join('/') }</p> */}
+						<p>{overview}</p>
 					</div>
+
 				</div>
 			</div>
 			
 		</div>
 	)
+	}
+	
 }
 
-export default MovieInfo;
+export default withStyles(styles)(MovieInfo);

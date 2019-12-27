@@ -4,7 +4,7 @@ import Nav from './Nav';
 // import SearchBox from './SearchBox'
 import MovieList from './MovieList'
 // import Pagination from './Pagination'
-// import MovieInfo from './MovieInfo'
+import MovieInfo from './MovieInfo'
 import Movie from './Movie'
 import '../styles/App.css'
 
@@ -18,8 +18,14 @@ class App extends Component {
 			<div className='App'>
 				<Switch>
 					<Route 
-						exact path='/movielist/:name/page/:number' 
+						exact 
+						path='/movielist/:name/page/:number' 
 						render={ routeProps => <div> <Nav /> <MovieList {...routeProps} /> </div>}
+					/>
+					<Route 
+						exact 
+						path='/movie/:id' 
+						render={ routeProps => <div> <Nav /> <MovieInfo {...routeProps} /> </div>}
 					/>
 					<Route
 						exact
