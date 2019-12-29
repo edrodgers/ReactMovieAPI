@@ -8,19 +8,14 @@ class Movie extends Component {
 		
 		return(
 			<div className='Movie-container'>
+				<Link to={`/movie/${movieId}`} onClick={e => e.stopPropagation()}>
 					<div className='Movie'>
 						<img src={`https://image.tmdb.org/t/p/w500/${imagePath}`} alt='card' className='Movie-img' />
 						<div className='Movie-title'>
 							<span>{title}</span>
 						</div>
-						<div className='Movie-Details'>
-							<Link to={`/movie/${movieId}`} onClick={e => e.stopPropagation()}>
-								<button type='submit'>View Details</button>
-							</Link>
-							
-						</div>
 					</div>
-					
+					</Link>
 			</div>
 		)
 	}

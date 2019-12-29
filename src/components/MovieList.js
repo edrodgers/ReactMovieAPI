@@ -36,6 +36,7 @@ class MovieList extends Component {
 	
 	async searchMovies(searchQuery) {
 		let searchResults = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=e3eaa7d9a9306546e691ebb236b3feb0&query=${searchQuery}`)	
+		console.log(searchResults)
 		this.setState({
 				movies: [...searchResults.data.results], 
 				totalResults: searchResults.data.total_results,
