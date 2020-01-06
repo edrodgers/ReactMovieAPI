@@ -40,7 +40,38 @@ const styles = {
 	
 	titleRow: {
 		
-	}
+	},
+	
+	castList: {
+		paddingLeft: '0',
+		paddingTop: '0',
+		" & div" : {
+			listStyle: 'none'
+			}
+	},
+
+	cast: {
+		paddingTop: '1em',
+    paddingBottom: '1em',
+	},
+	
+	card: {
+		width: '15%',
+    paddingRight: '2%',
+	},
+	
+	cardImage: {
+		width: '100px',
+	},
+	
+	cardName: {
+		fontSize: '17px',
+    fontWeight: '600',
+	},
+	
+	cardCharacter: {
+		
+	},
 
 }
 
@@ -87,6 +118,19 @@ class MovieInfo extends Component  {
 		const {classes} = this.props;
 		const { backdrop, poster, id, title, overview, genres, releaseDate, cast} = this.state;
 		
+		const fullGenre = genres.map(genre => (
+			<span>{genre.name}</span>
+		))
+		
+		const castList = cast.map(cast => (
+			<div className={classes.card}>
+				<img className={classes.cardImage} src={`https://image.tmdb.org/t/p/w300${cast.profile_path}`}/>
+				<p className={classes.cardName}>{cast.name}</p>
+				<p className={classes.cardCharacter}>{cast.character}</p>
+			</div>
+		)).filter((val, index) => index < 5)
+		
+		
 		return (
 		<div className='container'>
 			<div className='background-header'>
@@ -101,9 +145,18 @@ class MovieInfo extends Component  {
 							</div>
 
 							<div className={classes.infoContainer}>
-								<span className={classes.titleRow}><h1 className={classes.title}>{title}</h1> <span className={classes.date}>({releaseDate})</span></span>
-								{/*<p>{release_date.substring(5).split('-').concat(release_date.substring(0, 4)).join('/') }</p> */}
+								<span className={classes.titleRow}>
+									<h1 className={classes.title}>{title}</h1> 
+									<span className={classes.date}>({releaseDate})</span>
+									<div>{fullGenre}</div>
+								</span>
 								<p>{overview}</p>
+								<div className={`${classes.cast}` }>
+									<h3>Cast</h3>
+									<div className={`${classes.castList} ${classes.row}`}>
+										{castList}
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
