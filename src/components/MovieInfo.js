@@ -13,6 +13,18 @@ const styles = {
 		width: '1200px',
 		margin: '0 auto',
 	},
+	
+	backgroundHeader: {
+		height: '92vh',
+		width: 'auto',
+	// 	backgroundPosition: 'center top',
+	// 	backgroundRepeat: 'no-repeat',
+		
+	// 	'&::before': {
+	// 		content: '""',
+	// 		background: 'linear-gradient(0deg, rgb(0, 0, 0) 5%, rgba(0, 0, 0, 0.45) 92%) center center no-repeat',
+	// 	}
+	},
 
 	row: {
 		display: 'flex',
@@ -45,23 +57,24 @@ const styles = {
 	castList: {
 		paddingLeft: '0',
 		paddingTop: '0',
-		" & div" : {
-			listStyle: 'none'
-			}
+		
 	},
 
 	cast: {
 		paddingTop: '1em',
     paddingBottom: '1em',
+		justifyContent: 'space-between'
 	},
 	
 	card: {
 		width: '15%',
-    paddingRight: '2%',
-	},
+    background: '#3c3c3c',
+		borderBottom: '5px solid #302f2f',
+    padding: '10px',
+    borderRadius: '5px',	},
 	
 	cardImage: {
-		width: '100px',
+		width: '100%',
 	},
 	
 	cardName: {
@@ -71,6 +84,15 @@ const styles = {
 	
 	cardCharacter: {
 		
+	},
+	
+	nameContainer: {
+	},
+	
+	stats: {
+		paddingTop: '.5em',
+    // fontSize: '1.3em',
+    color: '#9e9e9e',
 	},
 
 }
@@ -87,6 +109,7 @@ class MovieInfo extends Component  {
 			overview: '',
 			genres: [],
 			releaseDate: null,
+			rating: '',
 			cast: []
 		
 		}
@@ -110,30 +133,32 @@ class MovieInfo extends Component  {
 			overview: searchResults.data.overview,
 			genres: [...searchResults.data.genres], 
 			releaseDate: searchResults.data.release_date.slice(0, 4),
+			rating: searchResults.data.vote_average,
 			cast: [...castResults.data.cast]
 			})
 	
 	}
 	render() {
 		const {classes} = this.props;
-		const { backdrop, poster, id, title, overview, genres, releaseDate, cast} = this.state;
+		const { backdrop, poster, id, title, overview, genres, releaseDate, cast, rating} = this.state;
 		
-		const fullGenre = genres.map(genre => (
-			<span>{genre.name}</span>
-		))
+		const fullGenre = genres.filter((val, index) => index < 2).map(genre => genre.name).join(", ")
 		
-		const castList = cast.map(cast => (
+		const castList = cast.filter((val, index) => index < 5).map(cast => (
 			<div className={classes.card}>
 				<img className={classes.cardImage} src={`https://image.tmdb.org/t/p/w300${cast.profile_path}`}/>
-				<p className={classes.cardName}>{cast.name}</p>
-				<p className={classes.cardCharacter}>{cast.character}</p>
+				<div className={classes.nameContainer}>
+					<p className={classes.cardName}>{cast.name}</p>
+					<p className={classes.cardCharacter}>{cast.character}</p>
+				</div>
 			</div>
-		)).filter((val, index) => index < 5)
-		
+		))
+			
 		
 		return (
 		<div className='container'>
-			<div className='background-header'>
+			<div className={classes.backgroundHeader} 
+						style={{background: `linear-gradient(0deg, rgb(0, 0, 0) 5%, rgba(0, 0, 0, 0.45) 92%) center center no-repeat, url(https://image.tmdb.org/t/p/original${backdrop}) center top no-repeat`}} >
 				<div className='background-filter'>
 					<div className={classes.innerContainer}>
 						<div className={classes.row}>
@@ -148,9 +173,13 @@ class MovieInfo extends Component  {
 								<span className={classes.titleRow}>
 									<h1 className={classes.title}>{title}</h1> 
 									<span className={classes.date}>({releaseDate})</span>
-									<div>{fullGenre}</div>
 								</span>
 								<p>{overview}</p>
+								<div className={classes.stats}>
+									<p>{`Genre: ${fullGenre}`}</p>
+									<p>{`Average User Rating: ${rating}`}</p>
+									<span></span>
+								</div>
 								<div className={`${classes.cast}` }>
 									<h3>Cast</h3>
 									<div className={`${classes.castList} ${classes.row}`}>
