@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 import { withStyles } from '@material-ui/styles';
-import axios from 'axios'
+import axios from 'axios';
 
 const styles = {
 	

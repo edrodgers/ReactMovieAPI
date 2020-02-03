@@ -6,6 +6,7 @@ import MovieList from './MovieList'
 // import Pagination from './Pagination'
 import MovieInfo from './MovieInfo'
 import Movie from './Movie'
+import LandingPage from './LandingPage'
 import '../styles/App.css'
 
 
@@ -30,7 +31,7 @@ class App extends Component {
 					<Route
 						exact
 						path = '/'
-						render ={() => <Nav />}
+						render ={() => <div> <Nav /> <LandingPage/> </div>}
 					/>
 				</Switch>				
 			</div>
