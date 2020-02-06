@@ -1,10 +1,18 @@
 import React, {Component} from 'react';
+import '../styles/swiper.css'
+import '../styles/LandingPage.css'
+
+
 import {Link} from 'react-router-dom'
 import { withStyles } from '@material-ui/styles';
 import axios from 'axios';
 import Swiper from 'swiper'
 
-const styles ={}
+const styles ={
+	
+	
+	
+}
 
 class LandingPage extends Component {
 	
@@ -19,7 +27,29 @@ class LandingPage extends Component {
 	}
 	
 	componentDidMount(){
-		this.getUpcomingMovies()
+		this.getUpcomingMovies();
+		// 	var mySwiper = new Swiper ('.swiper-container', {
+		// 	// Optional parameters
+		// 	direction: 'vertical',
+		// 	loop: true,
+
+		// 	// If we need pagination
+		// 	pagination: {
+		// 		el: '.swiper-pagination',
+		// 	},
+
+		// 	// Navigation arrows
+		// 	navigation: {
+		// 		nextEl: '.swiper-button-next',
+		// 		prevEl: '.swiper-button-prev',
+		// 	},
+
+		// 	// And if we need scrollbar
+		// 	scrollbar: {
+		// 		el: '.swiper-scrollbar',
+		// 	},
+		// })
+		
 	}
 	
 	async getUpcomingMovies() {
@@ -40,31 +70,32 @@ class LandingPage extends Component {
 	}
 	
 	render(){
+		
 		(() => {
-      const sliderEl = document.querySelector('.home-swiper-container');
-       if(!sliderEl){
-         return;
-       }
-       const slider = new Swiper(sliderEl, {
-         slidesPerView: 1,
-         loop: true,
-         spaceBetween: 0,
-         observer: true,
+		const sliderEl = document.querySelector('.home-swiper-container');
+		if(!sliderEl){
+		return;
+		}
+		const slider = new Swiper(sliderEl, {
+		slidesPerView: 1,
+		loop: true,
+		spaceBetween: 0,
+		observer: true,
 
-         autoplay: {
-          delay: 10000,
-        },
+		autoplay: {
+		delay: 10000,
+		},
 
-         pagination: {
-           el: '.home-swiper-pagination',
-           type: 'progressbar',
-         },
-         navigation: {
-           nextEl: '.home-swiper-button-next',
-           prevEl: '.home-swiper-button-prev',
-         }
-       });
-    })();
+		pagination: {
+		el: '.home-swiper-pagination',
+		type: 'progressbar',
+		},
+		navigation: {
+		nextEl: '.home-swiper-button-next',
+		prevEl: '.home-swiper-button-prev',
+		}
+		});
+		})();
 		
 		const {movies} = this.state;
 		// const movieList = movies.filter((val, index) => index < 3).map(movie => (
@@ -78,18 +109,32 @@ class LandingPage extends Component {
 			
 			
 		return(
+			// <div class="swiper-container">
+			// 		<div class="swiper-wrapper">
+			// 				<div class="swiper-slide">Slide 1</div>
+			// 				<div class="swiper-slide">Slide 2</div>
+			// 				<div class="swiper-slide">Slide 3</div>
+			// 		</div>
+			// 		<div class="swiper-pagination"></div>
+
+			// 		<div class="swiper-button-prev"></div>
+			// 		<div class="swiper-button-next"></div>
+
+			// 		<div class="swiper-scrollbar"></div>
+			// </div>
 			<div className="home-swiper-container">
+				<div className="home-swiper-pagination"></div>
 				<div className="swiper-wrapper">
 					{movies.filter((val, index) => index < 3).map(movie => (
 						<div className="swiper-slide">
-							<p className="now-playing">Now Playing</p>
-							<h2 className="now-playing-title">{movie.title}</h2>
-							<p>{`${this.getGenres(movie.genre_ids[0])} || ${movie.vote_average}`}</p>
+							<p className="swiper-slide__category">Now Playing</p>
+							<h2 className="swiper-slide__title">{movie.title}</h2>
+							<p className="swiper-slide__item-duration">{`${this.getGenres(movie.genre_ids[0])} || ${movie.vote_average}`}</p>
 						</div>
 						))
 					}
 				</div>
-				 <div className="home-swiper-pagination"></div>
+				 
 			</div>
 		)
 	}
