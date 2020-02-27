@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom'
+import Rating from './Rating';
+import {Link} from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 import axios from 'axios';
 
@@ -16,14 +17,7 @@ const styles = {
 	
 	backgroundHeader: {
 		height: '92vh',
-		width: 'auto',
-	// 	backgroundPosition: 'center top',
-	// 	backgroundRepeat: 'no-repeat',
-		
-	// 	'&::before': {
-	// 		content: '""',
-	// 		background: 'linear-gradient(0deg, rgb(0, 0, 0) 5%, rgba(0, 0, 0, 0.45) 92%) center center no-repeat',
-	// 	}
+		width: 'auto'
 	},
 
 	row: {
@@ -37,6 +31,8 @@ const styles = {
 
 	infoContainer: {
 		width: '800px',
+		background: '#1d1d1de3',
+    padding: '10px',
 	},
 	
 	title: {
@@ -141,6 +137,7 @@ class MovieInfo extends Component  {
 	render() {
 		const {classes} = this.props;
 		const { backdrop, poster, id, title, overview, genres, releaseDate, cast, rating} = this.state;
+		let transform = `rotate(${Math.floor((rating*.1)*180)}deg)`
 		
 		const fullGenre = genres.filter((val, index) => index < 2).map(genre => genre.name).join(", ")
 		
@@ -178,7 +175,7 @@ class MovieInfo extends Component  {
 								<div className={classes.stats}>
 									<p>{`Genre: ${fullGenre}`}</p>
 									<p>{`Average User Rating: ${rating}`}</p>
-									<span></span>
+									<Rating transform={transform} rotate={rating*10}/>
 								</div>
 								<div className={`${classes.cast}` }>
 									<h3>Cast</h3>
