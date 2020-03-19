@@ -5,58 +5,13 @@ const animate = {
 }
 const styles = {
   circleWrap: {
-  margin: '0 auto',
-  width: 150,
-  height: 150,
+  width: '80px',
+  height: '80px',
   background: '#4c4c4c',
   borderRadius: '50%',
 	padding: '6px',
 
-  
-  // '& $circle': {
-  //   '& $mask, $fill': {
-  //     width: 150,
-  //     height: '150px',
-  //     position: 'absolute',
-  //     borderRadius: '50%',
-  //   },
-    
-  //   '& $mask': {
-  //     clip: 'rect(0px, 150px, 150px, 75px)',
-      
-  //     '& $fill': {
-  //       clip: 'rect(0px, 75px, 150px, 0px)',
-  //       backgroundColor: '#bcff29',
-  //     }
-  //   },
-  //   '& $mask$full, $fill': {
-  //     animation: '$fill ease-in-out 3s',
-  //     animationFillMode: 'forwards',
-  //   }
-  // },
-  
-  // '& $insideCircle': {
-  //   background: '#4c4c4c',
-  // color: 'white',
-  //   width: 130,
-  //   height: 130,
-  //   borderRadius: '50%',
-  //   marginTop: 10,
-  //   marginLeft: 10,
-  //   position: 'absolute', 
-  //   zIndex: 100,
-  //   fontWeight: 700,
-  //   fontSize: '2em',
-  //   display: 'flex',
-  //   justifyContent: 'center', 
-  //   alignItems: 'center',
-  // }
 },  
-
-// '@keyframes fill':  {
-//   from: {transform: 'rotate(0deg)'},
-//   to: {transform:  props => (`rotate(${props.rotate}deg)`)},
-// },
 	
 bgCircle: {
 	borderRadius: '50%',
@@ -69,39 +24,39 @@ circle: {
 },
 
 mask: {
-  width: 150,
-  height: '150px',
+  width: '80px',
+  height: '80px',
   position: 'absolute',
   borderRadius: '50%',
-	clip: 'rect(0px, 150px, 150px, 75px)',
+	clip: 'rect(0px, 80px, 80px, 40px)',
 },
 
 fill: {
-  width: 150,
-  height: '150px',
+  width: '80px',
+  height: '80px',
   position: 'absolute',
   borderRadius: '50%',
-	clip: 'rect(0px, 75px, 150px, 0px)',
+	clip: 'rect(0px, 40px, 80px, 0px)',
   backgroundColor: '#bcff29',
-	transition: 'transform 3s',
+	transition: 'transform 2s',
 },
 
 full: {
-  transition: 'transform 3s',
+  transition: 'transform 2s',
 },
 
 insideCircle: {
   background: '#4c4c4c',
 	color: 'white',
-	width: 130,
-	height: 130,
+	width: 70,
+	height: 70,
 	borderRadius: '50%',
-	marginTop: 10,
-	marginLeft: 10,
+	marginTop: 5,
+	marginLeft: 5,
 	position: 'absolute', 
 	zIndex: 100,
 	fontWeight: 700,
-	fontSize: '2em',
+	fontSize: '1.3em',
 	display: 'flex',
 	justifyContent: 'center', 
 	alignItems: 'center',
@@ -122,7 +77,7 @@ class Rating extends Component {
 	componentDidMount() {
 		this.timerID = setTimeout(() => {
 			this.setState ({loaded: true})
-		}, 1000)
+		}, 500)
 		
 	}
 

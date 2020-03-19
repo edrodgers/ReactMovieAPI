@@ -90,6 +90,18 @@ const styles = {
     // fontSize: '1.3em',
     color: '#9e9e9e',
 	},
+	
+	innerInfoContainer: {
+		display: 'flex',
+	},
+	
+	leftColumn: {
+		width: '30%'
+	},
+	
+	rightColumn: {
+		width: '70%'
+	}
 
 }
 
@@ -167,16 +179,27 @@ class MovieInfo extends Component  {
 							</div>
 
 							<div className={classes.infoContainer}>
+								
 								<span className={classes.titleRow}>
 									<h1 className={classes.title}>{title}</h1> 
 									<span className={classes.date}>({releaseDate})</span>
+									
 								</span>
-								<p>{overview}</p>
-								<div className={classes.stats}>
-									<p>{`Genre: ${fullGenre}`}</p>
-									<p>{`Average User Rating: ${rating}`}</p>
-									<Rating transform={transform} rotate={rating*10}/>
+								<div className={classes.innerInfoContainer}>
+									<div className={classes.leftColumn}>
+										<Rating transform={transform} rotate={rating*10}/>
+										<div className={classes.stats}>
+											<p>{`Genre: ${fullGenre}`}</p>
+											<p>{`Average User Rating: ${rating}`}</p>
+										</div>
+									</div>
+									<div className={classes.rightColumn}>
+										<p>{overview}</p>
+									</div>
+									
+									
 								</div>
+								
 								<div className={`${classes.cast}` }>
 									<h3>Cast</h3>
 									<div className={`${classes.castList} ${classes.row}`}>
