@@ -191,7 +191,7 @@ class Nav extends Component {
 				<div className={classes.navContainerInner}>
 					<div className={classes.homeButtonContainer}>
 						<Link to='/' className={classes.homeButton}>
-							Film Quest
+							Film Quest Testing
 						</Link>
 					</div>
 
